@@ -13,7 +13,6 @@ const FilmIcon: React.FC<{className: string}> = ({className}) => (
 );
 
 const initialMovies: Movie[] = [
-    { id: 27205, title: 'Inception (2010)', posterPath: 'https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCK_RX5eDeZmo6B.jpg' },
     { id: 603, title: 'The Matrix (1999)', posterPath: 'https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg' },
     { id: 335984, title: 'Blade Runner 2049 (2017)', posterPath: 'https://image.tmdb.org/t/p/w500/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg' }
 ];
