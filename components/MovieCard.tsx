@@ -35,7 +35,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ recommendation }) => {
        )}
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-        <p className="text-slate-300 text-sm leading-relaxed mb-4">
+        <p className="text-slate-300 text-s leading-relaxed mb-4">
             <span className="font-semibold text-violet-400">Why you'll love it: </span>
             {reason}
         </p>
@@ -45,7 +45,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ recommendation }) => {
                 <h4 className="text-sm font-semibold text-slate-200 mb-2">Key Matches:</h4>
                 <ul className="space-y-2">
                     {match_reasons.map((match, index) => (
-                        <li key={index} className="flex items-start gap-2 text-slate-400 text-xs">
+                        <li key={index} className="flex items-start gap-2 text-slate-400 text-sm">
                            <CheckCircleIcon className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
                            <span>{match}</span>
                         </li>

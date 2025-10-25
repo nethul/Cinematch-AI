@@ -5,6 +5,7 @@ import { Movie } from '../types';
 interface InputChipsProps {
   movies: Movie[];
   setMovies: (movies: Movie[]) => void;
+  onFocusInput?: () => void;
 }
 
 const XIcon: React.FC<{ className: string }> = ({ className }) => (
@@ -20,7 +21,7 @@ const FilmPlaceholderIcon: React.FC<{ className: string }> = ({ className }) => 
 );
 
 
-const InputChips: React.FC<InputChipsProps> = ({ movies, setMovies }) => {
+const InputChips: React.FC<InputChipsProps> = ({ movies, setMovies, onFocusInput }) => {
   const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
   const [isSuggestionsLoading, setIsSuggestionsLoading] = useState<boolean>(false);
@@ -132,7 +133,11 @@ const InputChips: React.FC<InputChipsProps> = ({ movies, setMovies }) => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          onFocus={() => inputValue.trim().length >= 3 && setShowSuggestions(true)}
+            onFocus={() => {
+              if (inputValue.trim().length >= 3) setShowSuggestions(true);
+              // notify parent that the user focused the input (so parent can hide mock labels)
+              onFocusInput?.();
+            }}
           placeholder={movies.length === 0 ? "Type a favorite movie and press Enter..." : "Add another..."}
           className="flex-grow bg-transparent text-slate-200 placeholder-slate-400 focus:outline-none p-1 min-w-[200px]"
           autoComplete="off"
