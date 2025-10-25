@@ -18,7 +18,7 @@ const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendat
   // Create a shareable URL that encodes the recommendations into the query string
   // so recipients can open the link and see the same recommendations.
   const encodedRecommendations = encodeURIComponent(JSON.stringify(recommendations));
-  const shareLink = `${baseUrl}?shared=${encodedRecommendations}`;
+  const shareLink = `${baseUrl}`;
 
   const shareText = `I got these AI-based movie recommendations from Cinematch AI:\n\n${shortTitles}\n\nWhat will you get?\n\nCheck it out yourself: ${shareLink}`;
 
