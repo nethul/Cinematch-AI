@@ -3,12 +3,12 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { Movie, MovieRecommendation } from '../types';
 
 export const getMovieRecommendations = async (movies: Movie[]): Promise<MovieRecommendation[]> => {
-  if (!process.env.API_KEY) {
+  if (!process.env.VITE_GEMINI_API_KEY) {
     throw new Error("API_KEY environment variable not set");
   }
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  
+  const ai = new GoogleGenAI({ apiKey: process.env.VITE_GEMINI_API_KEY });
+
   const movieList = movies.map(movie => `- ${movie.title}`).join('\n');
   const prompt = `
     As a world-class film connoisseur and recommendation expert, analyze the following list of movies that a user loves.

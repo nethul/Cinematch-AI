@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import InputChips from './components/InputChips';
 import MovieCard from './components/MovieCard';
+import ShareRecommendations from './components/ShareRecommendations';
 import Loader from './components/Loader';
 import { getMovieRecommendations } from './services/geminiService';
 import { searchMovies } from './services/tmdbService';
@@ -54,6 +55,23 @@ const App: React.FC = () => {
     }
   };
 
+  // On mount: check for shared recommendations in URL
+  React.useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const shared = params.get('shared');
+      if (shared) {
+        const decoded = JSON.parse(decodeURIComponent(shared)) as MovieRecommendation[];
+        if (decoded && Array.isArray(decoded) && decoded.length > 0) {
+          setRecommendations(decoded);
+        }
+      }
+    } catch (e) {
+      // ignore malformed shared data
+      console.warn('Failed to parse shared recommendations from URL', e);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 font-sans p-4 sm:p-6 md:p-8">
       <div className="max-w-4xl mx-auto">
@@ -96,11 +114,19 @@ const App: React.FC = () => {
             )}
             
             {recommendations && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-                {recommendations.map((rec, index) => (
-                  <MovieCard key={index} recommendation={rec} />
-                ))}
-              </div>
+              <>
+                <ShareRecommendations recommendations={recommendations} />
+                <div className="mb-6">
+                  <h2 className="text-2xl font-semibold text-slate-200 mb-4 justify-center flex">
+                    Your Movie Recommendations
+                  </h2>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+                  {recommendations.map((rec, index) => (
+                    <MovieCard key={index} recommendation={rec} />
+                  ))}
+                </div>
+              </>
             )}
           </div>
         </main>

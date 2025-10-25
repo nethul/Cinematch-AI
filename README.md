@@ -36,3 +36,15 @@ API keys into client bundles. For secret keys, move API calls to a server-side
 endpoint where the keys remain secret.
 
 Note: Do NOT commit your `.env.local` or `.env` file to source control. `.gitignore` already contains a rule to ignore `.env` and `*.local` files.
+
+## SEO and social sharing
+
+To help search engines and social networks index and preview your app correctly, this project includes meta tags, Open Graph and Twitter Card tags in `index.html`, plus `robots.txt` and a simple `sitemap.xml` at the repo root.
+
+Before deploying, update the placeholder URLs and handles in `index.html`, `sitemap.xml`, and `robots.txt`:
+
+- Replace `https://your-domain.example/` with your production domain.
+- Replace `https://your-domain.example/og-image.png` with a real Open Graph image (1200x630 recommended).
+- Set `@your_twitter_handle` to your Twitter/X handle if you have one.
+
+After deployment, submit your `sitemap.xml` to Google Search Console and Bing Webmaster Tools and monitor indexing. Consider adding analytics and creating shareable content to drive traffic.
