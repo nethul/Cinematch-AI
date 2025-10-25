@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { Analytics } from '@vercel/analytics/react';
 
 // NOTE: Do NOT load `dotenv` in client-side code. `dotenv` expects Node APIs
 // (like process.cwd) and will fail when bundled for the browser. Environment
@@ -15,6 +16,9 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <>
+      <App />
+      <Analytics />
+    </>
   </React.StrictMode>
 );

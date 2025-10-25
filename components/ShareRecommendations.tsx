@@ -7,7 +7,7 @@ interface ShareRecommendationsProps {
   baseUrl?: string;
 }
 
-const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendations, baseUrl = 'https://your-domain.example/' }) => {
+const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendations, baseUrl = 'https://cinematchmovie.vercel.app/' }) => {
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
