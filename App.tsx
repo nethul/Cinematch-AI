@@ -10,9 +10,8 @@ import { Movie, MovieRecommendation } from './types';
 const FilmIcon: React.FC<{className: string}> = ({className}) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
       <path strokeLinecap="round" strokeLinejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" />
-    </svg>
+  </svg>
 );
-
 const initialMovies: Movie[] = [
   { id: 603, title: 'The Matrix (1999)', posterPath: 'https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg', isMock: true },
   { id: 335984, title: 'Blade Runner 2049 (2017)', posterPath: 'https://image.tmdb.org/t/p/w500/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg', isMock: true },
@@ -97,17 +96,17 @@ const App: React.FC = () => {
           posterPath: '/mr.nobody.webp',
           isMock: true
       },
-      {
-        title: 'Gattaca',
-        reason: `Your appreciation for dystopian futures, the struggle for individuality, and the quiet intensity of films like 'Blade Runner 2049' suggests you'll find 'Gattaca' incredibly compelling. It's a beautifully crafted vision of a future where genetic destiny dictates life, and one man's rebellion against this system speaks to the core themes of identity and free will you enjoy.`,
-        match_reasons: [
-          `Features a sleek, near-future dystopian setting where individuals struggle against a predetermined system, mirroring the fight for freedom in 'The Matrix'.`,
-          `Presents a contemplative and atmospheric tone, rich with existential questions about what it means to be human and unique, similar to 'Blade Runner 2049'.`,
-          `Explores a protagonist's struggle for identity and self-determination against societal constraints, echoing the anti-establishment undercurrents of 'Fight Club'.`
-        ],
-      posterPath: '/gattaca.webp',
-      isMock: true
-      },
+      // {
+      //   title: 'Gattaca',
+      //   reason: `Your appreciation for dystopian futures, the struggle for individuality, and the quiet intensity of films like 'Blade Runner 2049' suggests you'll find 'Gattaca' incredibly compelling. It's a beautifully crafted vision of a future where genetic destiny dictates life, and one man's rebellion against this system speaks to the core themes of identity and free will you enjoy.`,
+      //   match_reasons: [
+      //     `Features a sleek, near-future dystopian setting where individuals struggle against a predetermined system, mirroring the fight for freedom in 'The Matrix'.`,
+      //     `Presents a contemplative and atmospheric tone, rich with existential questions about what it means to be human and unique, similar to 'Blade Runner 2049'.`,
+      //     `Explores a protagonist's struggle for identity and self-determination against societal constraints, echoing the anti-establishment undercurrents of 'Fight Club'.`
+      //   ],
+      // posterPath: '/gattaca.webp',
+      // isMock: true
+      // },
       
     ];
 
@@ -272,8 +271,57 @@ const App: React.FC = () => {
           </div>
         </main>
         
-        <footer className="text-center mt-12 py-6 border-t border-slate-800">
-            <p className="text-slate-500 text-sm">Powered by Gemini API & TMDb</p>
+        <footer className="mt-12 pt-10 pb-6 border-t border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                  <h4 className="text-xl font-semibold text-slate-100 text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">Moviematch AI</h4>
+                  <p className="mt-2 text-slate-400 text-sm">Personalized movie recommendations that match mood, tone, and style. Powered by on-demand AI and enriched with TMDb movie api.</p>
+                </div>
+
+                <div className="flex items-center flex-col md:pl-14">
+                  <h5 className="text-lg font-semibold text-slate-100">Tech Stack</h5>
+                  <ul className="mt-2 text-slate-400 text-sm space-y-1">
+                    <li>React + TypeScript</li>
+                    <li>Vite</li>
+                    <li>Tailwind CSS</li>
+                    <li>Gemini API</li>
+                    <li>TMDb for movie details fetching</li>
+                  </ul>
+                </div>
+
+                <div className="flex items-center flex-col ml-auto md:pr-14">
+                  <h5 className="text-lg font-semibold text-slate-100 text-right">Developed By</h5>
+                  <p className="mt-2 text-slate-400">Nethul Nanayakkara</p>
+                  <div className="mt-3 flex items-center gap-4">
+                    <a href="https://github.com/nethul" aria-label="GitHub (opens in new tab)" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-200 text-sm flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
+                        <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.3-1.69-1.3-1.69-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.72 1.27 3.38.97.11-.75.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.06 11.06 0 012.9-.39c.98 0 1.97.13 2.9.38 2.2-1.5 3.17-1.18 3.17-1.18.63 1.6.23 2.78.11 3.06.74.8 1.19 1.83 1.19 3.1 0 4.43-2.71 5.41-5.29 5.69.42.36.79 1.08.79 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.2.68.79.56A11.5 11.5 0 0023.5 12C23.5 5.73 18.27.5 12 .5z" />
+                      </svg>
+                      <span>GitHub</span>
+                    </a>
+
+                    <a href="https://www.facebook.com/profile.php?id=61555716577750" aria-label="Facebook (opens in new tab)" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-200 text-sm flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
+                        <path d="M22 12a10 10 0 10-11.5 9.9v-7h-2.2V12h2.2V9.7c0-2.2 1.3-3.4 3.3-3.4.96 0 1.97.17 1.97.17v2.2h-1.12c-1.1 0-1.44.68-1.44 1.37V12h2.45l-.39 2.94h-2.06v7A10 10 0 0022 12z"/>
+                      </svg>
+                      <span>Facebook</span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/nethul-nanayakkara-8214b0355/" aria-label="LinkedIn (opens in new tab)" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-200 text-sm flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
+                        <path d="M4.98 3.5C3.88 3.5 3 4.38 3 5.48c0 1.1.88 1.98 1.98 1.98h.02C6.08 7.46 7 6.58 7 5.48 7 4.38 6.12 3.5 4.98 3.5zM3.5 8.98H6.5V20H3.5zM9.5 8.98h2.86v1.5h.04c.4-.76 1.4-1.56 2.88-1.56 3.08 0 3.64 2.03 3.64 4.67V20h-3V14.5c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92V20h-3V8.98z" />
+                      </svg>
+                      <span>LinkedIn</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 text-center text-slate-500 text-sm">
+                <span>© {new Date().getFullYear()} Moviematch AI — Powered by Gemini API & TMDb</span>
+              </div>
+            </div>
         </footer>
       </div>
        <style>{`
