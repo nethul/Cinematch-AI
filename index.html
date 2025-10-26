@@ -1,38 +1,52 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification" content="Omi41i4CSvxpVsppwIyuocNBIZDd-DDd2t-nzoEYeBU" />
 
-    <!-- Primary SEO -->
-    <title>Moviematch AI — Personalized movie recommendations powered by AI</title>
-    <meta name="description" content="MovieMatch AI analyzes your favorite films and recommends under-the-radar movies you'll love. Discover curated picks based on tone, themes, and directorial style." />
-    <meta name="keywords" content="movie recommendations, AI movie recommender, best movies to watch, personalized movie suggestions, film finder, discover movies, movie matching website, what movie to watch" />
-    <meta name="robots" content="index,follow" />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="Omi41i4CSvxpVsppwIyuocNBIZDd-DDd2t-nzoEYeBU" />
+
+  <!-- Primary SEO -->
+  <title>Moviematch AI — Personalized movie recommendations powered by AI</title>
+  <meta name="description"
+    content="MovieMatch AI analyzes your favorite films and recommends under-the-radar movies you'll love. Discover curated picks based on tone, themes, and directorial style." />
+  <meta name="keywords"
+    content="movie recommendations, AI movie recommender, best movies to watch, personalized movie suggestions, film finder, discover movies, movie matching website, what movie to watch" />
+  <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://moviematch.online/" />
-    <meta name="theme-color" content="#0f172a" />
+  <meta name="theme-color" content="#0f172a" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Moviematch AI — Personalized movie recommendations" />
-    <meta property="og:description" content="MovieMatch uses AI to analyzes your favorite films and recommends under-the-radar movies you'll love. Discover curated picks based on tone, themes, and directorial style." />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Moviematch AI — Personalized movie recommendations" />
+  <meta property="og:description"
+    content="MovieMatch uses AI to analyzes your favorite films and recommends under-the-radar movies you'll love. Discover curated picks based on tone, themes, and directorial style." />
   <meta property="og:url" content="https://moviematch.online/" />
-    <meta property="og:site_name" content="Moviematch AI" />
+  <meta property="og:site_name" content="Moviematch AI" />
   <meta property="og:image" content="https://moviematch.online/og-image.png" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@your_twitter_handle" />
-    <meta name="twitter:creator" content="@your_twitter_handle" />
-    <meta name="twitter:title" content="Moviematch AI — Personalized movie recommendations" />
-    <meta name="twitter:description" content="Get 5 hand-picked movie recommendations you haven't discovered yet — matched to your tastes by AI." />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@your_twitter_handle" />
+  <meta name="twitter:creator" content="@your_twitter_handle" />
+  <meta name="twitter:title" content="Moviematch AI — Personalized movie recommendations" />
+  <meta name="twitter:description"
+    content="Get 5 hand-picked movie recommendations you haven't discovered yet — matched to your tastes by AI." />
   <meta name="twitter:image" content="https://moviematch.online/og-image.png" />
 
-    <!-- Structured Data: WebSite + WebApplication -->
-    <script type="application/ld+json">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZFYL203EP1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZFYL203EP1');
+  </script>
+
+  <!-- Structured Data: WebSite + WebApplication -->
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -46,7 +60,7 @@
     }
     </script>
 
-    <script type="application/ld+json">
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
@@ -58,7 +72,7 @@
     }
     </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script type="importmap">
 {
   "imports": {
@@ -69,10 +83,12 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-slate-900">
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+
+<body class="bg-slate-900">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
