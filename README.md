@@ -41,10 +41,10 @@ Note: Do NOT commit your `.env.local` or `.env` file to source control. `.gitign
 
 To help search engines and social networks index and preview your app correctly, this project includes meta tags, Open Graph and Twitter Card tags in `index.html`, plus `robots.txt` and a simple `sitemap.xml` at the repo root.
 
-Before deploying, update the placeholder URLs and handles in `index.html`, `sitemap.xml`, and `robots.txt`:
+Before deploying, update the placeholder URLs and handles in `index.html`, `sitemap.xml`, and `robots.txt` (this repo has been updated to use `https://moviematch.online/`):
 
-- Replace `https://your-domain.example/` with your production domain.
-- Replace `https://your-domain.example/og-image.png` with a real Open Graph image (1200x630 recommended).
+- The project now points to `https://moviematch.online/` in meta tags and share defaults. Replace this value if you later move to a different domain.
+- Replace `https://moviematch.online/og-image.png` with a real Open Graph image (1200x630 recommended) if you have a custom image to serve from your domain.
 - Set `@your_twitter_handle` to your Twitter/X handle if you have one.
 
 After deployment, submit your `sitemap.xml` to Google Search Console and Bing Webmaster Tools and monitor indexing. Consider adding analytics and creating shareable content to drive traffic.

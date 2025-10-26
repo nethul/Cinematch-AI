@@ -26,7 +26,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ recommendation }) => {
          <img
            src={posterPath}
            alt={`Movie poster for ${title}`}
-           className="w-full h-48 object-cover"
+           className="w-full h-full object-cover"
          />
        ) : (
          <div className="w-full h-48 bg-slate-700 flex items-center justify-center">

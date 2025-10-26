@@ -7,7 +7,7 @@ interface ShareRecommendationsProps {
   baseUrl?: string;
 }
 
-const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendations, baseUrl = 'https://cinematchmovie.vercel.app/' }) => {
+const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendations, baseUrl = 'https://moviematch.online/' }) => {
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -18,22 +18,23 @@ const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendat
   // Create a shareable URL that encodes the recommendations into the query string
   // so recipients can open the link and see the same recommendations.
   const encodedRecommendations = encodeURIComponent(JSON.stringify(recommendations));
-  const shareLink = `${baseUrl}`;
+  // Include encoded recommendations in the share link so recipients reproduce the exact list
+  const shareLink = `${baseUrl}?shared=${encodedRecommendations}`;
 
-  const shareText = `I got these AI-based movie recommendations from Cinematch AI:\n\n${shortTitles}\n\nWhat will you get?\n\nCheck it out yourself: ${shareLink}`;
+  const shareText = `I got these AI-based movie recommendations from Moviematch AI:\n\n${shortTitles}\n\nWhat will you get?\n\nCheck it out yourself: ${shareLink}`;
 
-  const twitterText = encodeURIComponent(`I got these AI-based movie recommendations from Cinematch AI: ${shortTitles}. What will you get? Try it: ${shareLink}`);
+  const twitterText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${shortTitles}. What will you get? Try it: ${shareLink}`);
   const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}`;
-  const whatsappText = encodeURIComponent(`I got these AI-based movie recommendations from Cinematch AI: ${shortTitles}. Try it: ${baseUrl}`);
+  const whatsappText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${shortTitles}. Try it: ${baseUrl}`);
   const whatsappUrl = `https://wa.me/?text=${whatsappText}`;
-  const mailtoText = encodeURIComponent(`I got these AI-based movie recommendations from Cinematch AI: ${titles}.\n\nTry it: ${baseUrl}`);
-  const mailtoUrl = `mailto:?subject=${encodeURIComponent('My Cinematch AI recommendations')}&body=${mailtoText}`;
+  const mailtoText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${titles}.\n\nTry it: ${baseUrl}`);
+  const mailtoUrl = `mailto:?subject=${encodeURIComponent('My Moviematch AI recommendations')}&body=${mailtoText}`;
 
   const handleNativeShare = async () => {
     try {
       if ((navigator as any).share) {
         await (navigator as any).share({
-          title: 'My Cinematch AI recommendations',
+      title: 'My Moviematch AI recommendations',
           text: shareText,
           url: baseUrl,
         });

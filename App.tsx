@@ -155,9 +155,9 @@ const App: React.FC = () => {
         <header className="text-center mb-8">
             <div className="flex justify-center items-center gap-3 mb-2">
                 <FilmIcon className="w-10 h-10 text-violet-400" />
-                <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">
-                    Cinematch AI
-                </h1>
+        <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">
+          Moviematch AI
+        </h1>
             </div>
             <p className="text-slate-400 max-w-2xl mx-auto">
                 Tell us what you love, and we'll find your next obsession. Our AI goes beyond genres to match the very soul of the movies you cherish. 
@@ -192,7 +192,7 @@ const App: React.FC = () => {
             {recommendations && !(recommendations.every(r => (r as any).isMock) && !showMocks) && (
               <>
                 <ShareRecommendations recommendations={recommendations} />
-                <div className="mb-6">
+                <div className="mb-10">
                   <h2 className="text-2xl font-semibold text-slate-200 mb-4 justify-center flex">
                     Your Movie Recommendations
                   </h2>
@@ -208,7 +208,7 @@ const App: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <div className="col-span-2 text-slate-300 text-sm leading-relaxed">
                       <p className="mb-3">
-                        Cinematch is built to save you time and deliver recommendations that feel personal. Instead of spitting out long genre lists, we take a tiny sample of the films you already love and return a short, focused set of titles that match the mood, craft, and emotional heartbeat of your favorites. Below is a friendly walkthrough so you know exactly what happens from first click to final pick.
+                        Moviematch is built to save you time and deliver recommendations that feel personal. Instead of spitting out long genre lists, we take a tiny sample of the films you already love and return a short, focused set of titles that match the mood, craft, and emotional heartbeat of your favorites. Below is a friendly walkthrough so you know exactly what happens from first click to final pick.
                       </p>
 
                       <div className="space-y-3">
