@@ -11,20 +11,25 @@ export const getMovieRecommendations = async (movies: Movie[]): Promise<MovieRec
 
   const movieList = movies.map(movie => `- ${movie.title}`).join('\n');
   const prompt = `
-    As a world-class film connoisseur and recommendation expert, analyze the following list of movies that a user loves.
-    Based on this list, identify the underlying themes, tones, directorial styles, narrative structures, and subtle emotional currents that connect these films.
-    Do not just match by genre or actors.
-    Generate a list of 5 unique movie recommendations that this user will almost certainly love, but might not have discovered.
+    You are an expert film recommender. Analyze the user's favorite movies and identify underlying themes, tones, directorial styles, narrative structures, and emotional currents. Do not just match by genre, actors, or popularity.
+Based on this analysis, generate **5 unique movie recommendations** the user will likely love but might not have discovered. 
+Return the result as a JSON array of objects with this structure:
 
-    For each recommendation, provide the following in a JSON object:
-    1. "title": The title of the recommended movie.
-    2. "reason": A short, compelling, and personalized paragraph (2-3 sentences) explaining *why* they will love it, connecting it back to the tastes demonstrated by their favorite movies.
-    3. "match_reasons": An array of 2-3 short strings. Each string should be a bullet point that specifically highlights a shared feature with one of the user's favorite movies. For example: "Shares the philosophical depth and stunning visuals of 'Blade Runner 2049'." or "Features a complex, non-linear narrative similar to 'Inception'."
+[
+  {
+    "title": "Movie Title",
+    "reason": "2-3 sentence explanation connecting the recommendation to the user's taste.",
+    "match_reasons": [
+      "Brief bullet point connecting to a feature of a favorite movie.",
+      "Another short bullet point highlighting a shared quality."
+    ]
+  }
+]
 
-    The user loves:
-    ${movieList}
+User's favorite movies:
+${movieList}
 
-    Return the response as a JSON array of objects, following the schema precisely.
+Return **only valid JSON**, do not include any explanation or extra text.
   `;
 
   try {
