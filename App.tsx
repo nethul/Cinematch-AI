@@ -284,7 +284,6 @@ const App: React.FC = () => {
                   <ul className="mt-2 text-slate-400 text-sm space-y-1">
                     <li>React + TypeScript</li>
                     <li>Vite</li>
-                    <li>Tailwind CSS</li>
                     <li>Gemini API</li>
                     <li>TMDb for movie details fetching</li>
                   </ul>
