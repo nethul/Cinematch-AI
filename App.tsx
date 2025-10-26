@@ -191,7 +191,7 @@ const App: React.FC = () => {
             
             {recommendations && !(recommendations.every(r => (r as any).isMock) && !showMocks) && (
               <>
-                <ShareRecommendations recommendations={recommendations} />
+                
                 <div className="mb-10">
                   <h2 className="text-2xl font-semibold text-slate-200 mb-4 justify-center flex">
                     Your Movie Recommendations
@@ -202,6 +202,8 @@ const App: React.FC = () => {
                     <MovieCard key={index} recommendation={rec} />
                   ))}
                 </div>
+
+                <ShareRecommendations recommendations={recommendations} />
                 
                 <section className="mt-8 bg-slate-800 p-6 rounded-lg border border-slate-700">
                   <h3 className="text-2xl font-semibold text-slate-100 mb-4 justify-center flex">How it works!</h3>

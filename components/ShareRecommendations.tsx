@@ -19,14 +19,14 @@ const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendat
   // so recipients can open the link and see the same recommendations.
   const encodedRecommendations = encodeURIComponent(JSON.stringify(recommendations));
   // Include encoded recommendations in the share link so recipients reproduce the exact list
-  const shareLink = `${baseUrl}?shared=${encodedRecommendations}`;
+  const shareLink = `${baseUrl}`;
 
   const shareText = `I got these AI-based movie recommendations from Moviematch AI:\n\n${shortTitles}\n\nWhat will you get?\n\nCheck it out yourself: ${shareLink}`;
 
   const twitterText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${shortTitles}. What will you get? Try it: ${shareLink}`);
   const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}`;
-  const whatsappText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${shortTitles}. Try it: ${baseUrl}`);
-  const whatsappUrl = `https://wa.me/?text=${whatsappText}`;
+  const whatsappText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${shortTitles}. What will you get? Try it: ${baseUrl}`);
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
   const mailtoText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${titles}.\n\nTry it: ${baseUrl}`);
   const mailtoUrl = `mailto:?subject=${encodeURIComponent('My Moviematch AI recommendations')}&body=${mailtoText}`;
 
@@ -92,21 +92,21 @@ const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendat
   }, []);
 
   return (
-    <div ref={containerRef} className="flex items-center justify-end gap-3 mb-6 relative">
+    <div ref={containerRef} className="flex items-center justify-center gap-2 mb-8 my-6 relative">
       <button
         onClick={() => setOpen(o => !o)}
-        className="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-4 py-2 rounded-md shadow hover:shadow-cyan-500/30 transition"
+        className="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-8 py-4 rounded-md shadow hover:shadow-cyan-500/30 transition"
         aria-haspopup="menu"
         aria-expanded={open}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
           <path d="M15 8a3 3 0 10-2.83-4H9.41l1.3 1.3a1 1 0 01-1.42 1.42L8 5.41 6.71 6.7A1 1 0 115.29 5.29L6.59 4H4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V8h-3z" />
         </svg>
-        Share
+        Share with Friends!
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-64 bg-slate-800 border border-slate-700 rounded-md shadow-lg z-20">
+        <div className="absolute mt-2 w-64 bg-slate-800 border border-slate-700 rounded-md shadow-lg z-20">
           <div className="p-3">
             <div className="text-sm text-slate-300 mb-2">Share your recommendations</div>
             <button
@@ -116,7 +116,7 @@ const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendat
               <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M15 8a3 3 0 10-2.83-4H9.41l1.3 1.3a1 1 0 01-1.42 1.42L8 5.41 6.71 6.7A1 1 0 115.29 5.29L6.59 4H4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V8h-3z" />
               </svg>
-              Share with your Friends
+              Share with your Friends!
             </button>
 
             <button
