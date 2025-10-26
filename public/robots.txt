@@ -1,0 +1,7 @@
+# robots.txt for moviematch.online
+# Generated/maintained in-repo. Update before deploy if you have special paths to expose or hide.
+
+User-agent: *
+# Allow all public content by default
+Allow: /
+Sitemap: https://moviematch.online/sitemap.xml

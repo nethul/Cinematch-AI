@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://moviematch.online/sitemap.xml
