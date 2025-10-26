@@ -13,7 +13,7 @@ const Loader: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentMessage((prev) => (prev + 1) % messages.length);
-    }, 2500); // Change message every 2.5 seconds
+    }, 5000); // Change message every 2.5 seconds
 
     return () => clearInterval(interval);
   }, []);
