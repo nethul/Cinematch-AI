@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { MovieRecommendation } from '../types';
 import { findFirstByTitle } from '../services/tmdbService';
 
@@ -21,7 +20,6 @@ const CheckCircleIcon: React.FC<{ className: string }> = ({ className }) => (
 
 const MovieCard: React.FC<MovieCardProps> = ({ recommendation }) => {
   const { title, reason, posterPath, match_reasons } = recommendation;
-  const navigate = useNavigate();
   const [isNavigating, setIsNavigating] = React.useState(false);
 
   const handleOpenDetails = async () => {
@@ -30,7 +28,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ recommendation }) => {
     try {
       const result = await findFirstByTitle(title);
       if (result) {
-        navigate(`/movie/${result.id}`);
+        const url = `/movie/${result.id}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
       } else {
         alert('Could not find this movie on TMDb.');
       }
