@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MovieRecommendation } from '../types';
+import { findFirstByTitle } from '../services/tmdbService';
 
 interface MovieCardProps {
   recommendation: MovieRecommendation;
@@ -19,9 +21,26 @@ const CheckCircleIcon: React.FC<{ className: string }> = ({ className }) => (
 
 const MovieCard: React.FC<MovieCardProps> = ({ recommendation }) => {
   const { title, reason, posterPath, match_reasons } = recommendation;
+  const navigate = useNavigate();
+  const [isNavigating, setIsNavigating] = React.useState(false);
+
+  const handleOpenDetails = async () => {
+    if (isNavigating) return;
+    setIsNavigating(true);
+    try {
+      const result = await findFirstByTitle(title);
+      if (result) {
+        navigate(`/movie/${result.id}`);
+      } else {
+        alert('Could not find this movie on TMDb.');
+      }
+    } finally {
+      setIsNavigating(false);
+    }
+  };
 
   return (
-    <div className="bg-slate-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out border border-slate-700 flex flex-col">
+    <button onClick={handleOpenDetails} disabled={isNavigating} className={`text-left bg-slate-800 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out border border-slate-700 flex flex-col ${isNavigating ? '' : 'hover:scale-105'} disabled:opacity-70`}>
        {posterPath ? (
          <img
            src={posterPath}
@@ -53,8 +72,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ recommendation }) => {
                 </ul>
             </div>
         )}
+        {isNavigating && (
+          <div className="mt-3 text-sm text-slate-400">Opening details…</div>
+        )}
       </div>
-    </div>
+    </button>
   );
 };
 

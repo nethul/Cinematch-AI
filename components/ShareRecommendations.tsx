@@ -3,11 +3,11 @@ import { MovieRecommendation } from '../types';
 
 interface ShareRecommendationsProps {
   recommendations: MovieRecommendation[];
-  // optional: baseUrl to include in the shared message (defaults to README placeholder)
+  // optional: baseUrl override; defaults to current origin
   baseUrl?: string;
 }
 
-const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendations, baseUrl = 'https://moviematch.online/' }) => {
+const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendations, baseUrl }) => {
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -15,29 +15,26 @@ const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendat
   const titles = recommendations.map(r => r.title).join(', ');
   const shortTitles = recommendations.map(r => r.title).slice(0, 5).join(', ');
 
-  // Create a shareable URL that encodes the recommendations into the query string
-  // so recipients can open the link and see the same recommendations.
-  const encodedRecommendations = encodeURIComponent(JSON.stringify(recommendations));
-  // Include encoded recommendations in the share link so recipients reproduce the exact list
-  const shareLink = `${baseUrl}`;
+  // Build canonical share URL including encoded recommendations so recipients see the same list
+  const origin = (typeof window !== 'undefined' && window.location?.origin) ? window.location.origin : (baseUrl || 'https://moviematch.online');
+  const appBase = baseUrl || origin + '/';
+  const shareLink = appBase;
 
-  const shareText = `I got these AI-based movie recommendations from Moviematch AI:\n\n${shortTitles}\n\nWhat will you get?\n\nCheck it out yourself: ${shareLink}`;
+  const shareTitle = 'My Moviematch AI recommendations';
+  const shareText = `I got these AI-based movie recommendations from Moviematch AI:\n\n${shortTitles}\n\nOpen this link to view them:`;
 
-  const twitterText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${shortTitles}. What will you get? Try it: ${shareLink}`);
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}`;
-  const whatsappText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${shortTitles}. What will you get? Try it: ${baseUrl}`);
+  const twitterText = encodeURIComponent(`${shareTitle}: ${shortTitles}`);
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(shareLink)}`;
+  const whatsappText = encodeURIComponent(`${shareTitle}: ${shortTitles} ${shareLink}`);
   const whatsappUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
-  const mailtoText = encodeURIComponent(`I got these AI-based movie recommendations from Moviematch AI: ${titles}.\n\nTry it: ${baseUrl}`);
-  const mailtoUrl = `mailto:?subject=${encodeURIComponent('My Moviematch AI recommendations')}&body=${mailtoText}`;
+  const mailtoText = encodeURIComponent(`${shareTitle}: ${titles}\n\n${shareLink}`);
+  const mailtoUrl = `mailto:?subject=${encodeURIComponent(shareTitle)}&body=${mailtoText}`;
 
   const handleNativeShare = async () => {
     try {
-      if ((navigator as any).share) {
-        await (navigator as any).share({
-      title: 'My Moviematch AI recommendations',
-          text: shareText,
-          url: baseUrl,
-        });
+      const canUseWebShare = typeof navigator !== 'undefined' && (navigator as any).share;
+      if (canUseWebShare) {
+        await (navigator as any).share({ title: shareTitle, text: shareText, url: shareLink });
       } else {
         await handleCopy();
       }
@@ -49,14 +46,14 @@ const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendat
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(shareText);
+      await navigator.clipboard.writeText(shareLink);
       setCopied(true);
       setTimeout(() => setCopied(false), 3000);
     } catch (err) {
       // fallback
       try {
         const el = document.createElement('textarea');
-        el.value = shareText;
+        el.value = shareLink;
         document.body.appendChild(el);
         el.select();
         document.execCommand('copy');
@@ -106,35 +103,40 @@ const ShareRecommendations: React.FC<ShareRecommendationsProps> = ({ recommendat
       </button>
 
       {open && (
-        <div className="absolute mt-2 w-64 bg-slate-800 border border-slate-700 rounded-md shadow-lg z-20">
-          <div className="p-3">
-            <div className="text-sm text-slate-300 mb-2">Share your recommendations</div>
+        <div className="absolute mt-2 w-[22rem] sm:w-96 bg-slate-800 border border-slate-700 rounded-md shadow-lg z-20">
+          <div className="p-4">
+            <div className="text-sm text-slate-300 mb-3">Share your recommendations</div>
+
             <button
               onClick={handleNativeShare}
-              className="w-full text-left px-3 py-2 rounded-md hover:bg-slate-700 transition text-white flex items-center gap-2"
+              className="w-full px-3 py-2 rounded-md bg-slate-700 hover:bg-slate-600 transition text-white flex items-center justify-center gap-2"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M15 8a3 3 0 10-2.83-4H9.41l1.3 1.3a1 1 0 01-1.42 1.42L8 5.41 6.71 6.7A1 1 0 115.29 5.29L6.59 4H4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V8h-3z" />
               </svg>
-              Share with your Friends!
+              Share via device…
             </button>
 
-            <button
-              onClick={handleCopy}
-              className="w-full text-left mt-2 px-3 py-2 rounded-md hover:bg-slate-700 transition text-white flex items-center gap-2"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M16 1H4a2 2 0 00-2 2v12h2V3h12V1zM20 5H8a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h12v14z" />
-              </svg>
-              {copied ? 'Copied message' : 'Copy message'}
-            </button>
+            <div className="mt-3">
+              <label className="block text-xs text-slate-400 mb-1">Link</label>
+              <div className="flex items-stretch gap-2">
+                <input
+                  readOnly
+                  value={shareLink}
+                  className="flex-1 bg-slate-900 border border-slate-700 rounded-md px-3 py-2 text-xs text-slate-300 truncate"
+                />
+                <button onClick={handleCopy} className="px-3 py-2 text-sm bg-cyan-600 hover:bg-cyan-700 rounded-md text-white">
+                  {copied ? 'Copied' : 'Copy'}
+                </button>
+              </div>
+            </div>
 
-            {/* <div className="flex gap-2 mt-3">
-              <a href={twitterUrl} target="_blank" rel="noreferrer" className="flex-1 bg-blue-500 hover:bg-blue-600 text-white px-2 py-2 rounded-md text-center text-sm">Twitter</a>
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex-1 bg-green-500 hover:bg-green-600 text-white px-2 py-2 rounded-md text-center text-sm">WhatsApp</a>
-            </div> */}
-
-            {/* <a href={mailtoUrl} className="block mt-3 text-sm text-slate-400 hover:text-slate-200">Share by email</a> */}
+            <div className="mt-4 grid grid-cols-4 gap-2">
+              <a href={twitterUrl} target="_blank" rel="noreferrer" className="text-center text-xs bg-[#1DA1F2] hover:brightness-110 text-white py-2 rounded-md">X</a>
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="text-center text-xs bg-[#25D366] hover:brightness-110 text-white py-2 rounded-md">WhatsApp</a>
+              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareLink)}`} target="_blank" rel="noreferrer" className="text-center text-xs bg-[#1877F2] hover:brightness-110 text-white py-2 rounded-md">Facebook</a>
+              <a href={mailtoUrl} className="text-center text-xs bg-slate-700 hover:bg-slate-600 text-white py-2 rounded-md">Email</a>
+            </div>
           </div>
         </div>
       )}

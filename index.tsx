@@ -1,7 +1,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
+import MovieDetailsPage from './pages/MovieDetails';
 import { Analytics } from '@vercel/analytics/react';
 
 // NOTE: Do NOT load `dotenv` in client-side code. `dotenv` expects Node APIs
@@ -16,9 +18,12 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <>
-      <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/movie/:id" element={<MovieDetailsPage />} />
+      </Routes>
       <Analytics />
-    </>
+    </BrowserRouter>
   </React.StrictMode>
 );
