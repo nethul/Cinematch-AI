@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import MovieDetailsPage from './pages/MovieDetails';
+import AboutPage from './pages/About';
+import ContactPage from './pages/Contact';
+import PrivacyPage from './pages/Privacy';
 import { Analytics } from '@vercel/analytics/react';
 
 // NOTE: Do NOT load `dotenv` in client-side code. `dotenv` expects Node APIs
@@ -22,6 +25,9 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/movie/:id" element={<MovieDetailsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
       </Routes>
       <Analytics />
     </BrowserRouter>

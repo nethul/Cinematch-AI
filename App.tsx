@@ -6,6 +6,7 @@ import Loader from './components/Loader';
 import { getMovieRecommendations } from './services/geminiService';
 import { searchMovies } from './services/tmdbService';
 import { Movie, MovieRecommendation } from './types';
+import Navbar from './components/Navbar';
 
 const FilmIcon: React.FC<{className: string}> = ({className}) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
@@ -148,7 +149,10 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 font-sans p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-slate-900 text-slate-100 font-sans p-0">
+      <div id="top"></div>
+      <Navbar />
+      <div className="p-4 sm:p-6 md:p-8">
       <div className="max-w-7xl mx-auto">
         
         <header className="text-center mb-8">
@@ -269,8 +273,12 @@ const App: React.FC = () => {
               </>
             )}
           </div>
+
+          {/* Sections moved to dedicated pages: /about, /contact, /privacy */}
         </main>
         
+        {/* Privacy moved to /privacy */}
+
         <footer className="mt-12 pt-10 pb-6 border-t border-slate-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -314,6 +322,7 @@ const App: React.FC = () => {
                       <span>LinkedIn</span>
                     </a>
                   </div>
+                  <a href="/privacy" className="mt-4 text-sm text-slate-400 hover:text-slate-200">Privacy Policy</a>
                 </div>
               </div>
 
@@ -322,6 +331,7 @@ const App: React.FC = () => {
               </div>
             </div>
         </footer>
+      </div>
       </div>
        <style>{`
           @keyframes fade-in {
