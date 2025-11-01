@@ -7,6 +7,7 @@ import { getMovieRecommendations } from './services/geminiService';
 import { searchMovies } from './services/tmdbService';
 import { Movie, MovieRecommendation } from './types';
 import Navbar from './components/Navbar';
+import styles from './src/styles/utils.module.css';
 
 const FilmIcon: React.FC<{className: string}> = ({className}) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
@@ -150,6 +151,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 font-sans p-0">
+      <h1 className={styles.visually_hidden}>Moviematch AI - Personalized movie recommendations powered by AI</h1>
       <div id="top"></div>
       <Navbar />
       <div className="p-4 sm:p-6 md:p-8">
